@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Presentismo N8N (TEST)</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
+        form { max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: white; box-shadow: 2px 2px 10px rgba(0,0,0,0.1); }
+        h2 { color: #333; text-align: center; }
+        label, input[type="text"], input[type="submit"] { display: block; margin-bottom: 10px; }
+        input[type="text"] { width: 90%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        .radio-group label { display: inline-block; margin-right: 20px; }
+        input[type="submit"] { background-color: #4CAF50; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-size: 16px; }
+        input[type="submit"]:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+    <form method="POST" action="https://omardomz25.app.n8n.cloud/webhook-test/6QNIYD8Z7Q3JS1lz/webhook%20de%20presentismo/">
+        <h2>Control de Presentismo (TEST)</h2>
+        <label for="ID_Usuario">ID de Empleado:</label>
+        <input type="text" id="ID_Usuario" name="ID_Usuario" required placeholder="Ej: 00123">
+
+
+        <div class="radio-group">
+            <label>Tipo de Registro:</label>
+            <input type="radio" id="entrada" name="Tipo_Evento" value="Entrada" required>
+            <label for="entrada">Check-in (Entrada) 🟢</label><br>
+            
+            <input type="radio" id="salida" name="Tipo_Evento" value="Salida">
+            <label for="salida">Check-out (Salida) 🔴</label>
+        </div>
+        
+        <input type="submit" value="Enviar Registro">
+    </form>
+</body>
+</html>
