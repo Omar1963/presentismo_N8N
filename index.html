@@ -3,37 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Presentismo N8N (TEST)</title>
+    <title>Registro de Servicio Ágil</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
-        form { max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: white; box-shadow: 2px 2px 10px rgba(0,0,0,0.1); }
-        h2 { color: #333; text-align: center; }
-        label, input[type="text"], input[type="submit"] { display: block; margin-bottom: 10px; }
-        input[type="text"] { width: 90%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
-        .radio-group label { display: inline-block; margin-right: 20px; }
-        input[type="submit"] { background-color: #4CAF50; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-size: 16px; }
-        input[type="submit"]:hover { background-color: #45a049; }
+        /* Estilos base para un diseño moderno */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+        }
+        h1 {
+            color: #1a73e8;
+            margin-bottom: 5px;
+            font-size: 24px;
+        }
+        p.subtitle {
+            color: #5f6368;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        label {
+            display: block;
+            text-align: left;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #3c4043;
+        }
+        input[type="text"], input[type="password"], input[type="datetime-local"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        input:focus {
+            border-color: #1a73e8;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
+        }
+        input[readonly] {
+            background-color: #e8e8e8;
+            cursor: default;
+            color: #707070;
+            font-style: italic;
+        }
+        .radio-group {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            margin-bottom: 25px;
+        }
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 10px 15px;
+            border: 2px solid #dadce0;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .radio-group input[type="radio"]:checked + label {
+            border-color: #1a73e8;
+            background-color: #e8f0fe;
+            color: #1a73e8;
+            font-weight: 700;
+        }
+        .radio-group input[type="radio"] {
+            display: none;
+        }
+        .radio-group span {
+            margin-left: 8px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #1a73e8;
+            color: white;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #1558b3;
+        }
+        #status-message {
+            margin-top: 20px;
+            font-weight: 600;
+            color: #f44336; /* Rojo para mensajes iniciales/errores */
+        }
+        #status-message.success {
+            color: #4CAF50;
+        }
     </style>
 </head>
 <body>
-    <form method="POST" action="https://omardomz25.app.n8n.cloud/webhook-test/6QNIYD8Z7Q3JS1lz/ctrlpresentismo/">
-        <h2>Control de Presentismo (TEST)</h2>
-        <label for="ID_Usuario">ID de Empleado:</label>
-        <input type="text" id="ID_Usuario" name="ID_Usuario" required placeholder="Ej: 00123">
+    <div class="container">
+        <h1>Registro de Servicio Ágil</h1>
+        <p class="subtitle">Certificación de horas de trabajo con control geográfico.</p>
 
-
-        <div class="radio-group">
-            <label>Tipo de Registro:</label>
-            <input type="radio" id="entrada" name="Tipo_Evento" value="Entrada" required>
-            <label for="entrada">Check-in (Entrada) 🟢</label><br>
+        <form method="POST" action="[TU WEBHOOK DE N8N AQUÍ]" id="presentismoForm">
             
-            <input type="radio" id="salida" name="Tipo_Evento" value="Salida">
-            <label for="salida">Check-out (Salida) 🔴</label>
-        </div>
+            <label for="UserEmail">Correo (ID de Usuario):</label>
+            <input type="text" id="UserEmail" name="UserEmail" required placeholder="tu.correo@empresa.com">
+
+            <label for="UserSecretKey">Clave Secreta:</label>
+            <input type="password" id="UserSecretKey" name="UserSecretKey" required>
+
+            <label for="displayTime">Hora del Sistema (No Editable):</label>
+            <input type="datetime-local" id="displayTime" readonly>
+
+            <label>Tipo de Registro:</label>
+            <div class="radio-group">
+                <input type="radio" id="entrada" name="Tipo_Evento" value="Entrada" required>
+                <label for="entrada"><span>🟢 Check-in (Entrada)</span></label>
+                
+                <input type="radio" id="salida" name="Tipo_Evento" value="Salida">
+                <label for="salida"><span>🔴 Check-out (Salida)</span></label>
+            </div>
+            
+            <input type="hidden" id="latitude" name="latitude">
+            <input type="hidden" id="longitude" name="longitude">
+            <input type="hidden" id="timestamp" name="timestamp">
+            
+            <button type="submit" id="submitButton">Registrar Evento</button>
+            <div id="status-message">Por favor, permita la geolocalización.</div>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('presentismoForm');
+        const displayTimeInput = document.getElementById('displayTime');
+        const submitButton = document.getElementById('submitButton');
+        const statusMessage = document.getElementById('status-message');
+
+        // Función para mostrar la hora local y actualizar el campo readonly
+        function updateDisplayTime() {
+            const now = new Date();
+            // Formato YYYY-MM-DDTHH:mm para input type="datetime-local"
+            const year = now.getFullYear();
+            const month = (now.getMonth() + 1).toString().padStart(2, '0');
+            const day = now.getDate().toString().padStart(2, '0');
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            
+            displayTimeInput.value = `${year}-${month}-${day}T${hours}:${minutes}`;
+        }
         
-        <input type="submit" value="Enviar Registro">
-    </form>
+        // Actualiza la hora al cargar la página
+        updateDisplayTime();
+        
+        // Evita el envío del formulario hasta que se obtengan las coordenadas
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            
+            submitButton.disabled = true;
+            statusMessage.textContent = 'Obteniendo ubicación...';
+
+            // 1. Capturar la hora (en formato ISO para n8n)
+            const submissionTime = new Date();
+            document.getElementById('timestamp').value = submissionTime.toISOString();
+            
+            // 2. Intentar obtener la geolocalización
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        // Éxito: Coordenadas capturadas
+                        document.getElementById('latitude').value = position.coords.latitude;
+                        document.getElementById('longitude').value = position.coords.longitude;
+                        
+                        statusMessage.textContent = 'Ubicación capturada. Enviando registro...';
+                        statusMessage.classList.remove('error');
+                        statusMessage.classList.add('success');
+                        
+                        // 3. Reanudar el envío del formulario con todos los datos
+                        form.submit();
+                    },
+                    function(error) {
+                        // Fallo: Usuario negó el permiso o error de GPS
+                        submitButton.disabled = false;
+                        let errorMessage = 'ERROR: No se pudo obtener la ubicación. Por favor, asegúrate de tener el GPS activado y permite la geolocalización en tu navegador.';
+                        if (error.code === error.PERMISSION_DENIED) {
+                            errorMessage = 'ERROR: Negaste el permiso de geolocalización. Es obligatorio para el registro.';
+                        }
+                        statusMessage.textContent = errorMessage;
+                        statusMessage.classList.remove('success');
+                        statusMessage.classList.add('error');
+                    },
+                    { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 } // Opciones de precisión
+                );
+            } else {
+                // El navegador no soporta Geolocation
+                submitButton.disabled = false;
+                statusMessage.textContent = 'ERROR: Tu navegador no soporta Georreferenciación.';
+                statusMessage.classList.remove('success');
+                statusMessage.classList.add('error');
+            }
+        });
+    </script>
 </body>
-
 </html>
-
